@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
-name: GraphQL Language
+name: GraphQL
 file_extensions:
   - graphql
   - gql
@@ -30,6 +30,9 @@ contexts:
     - match: '}'
       scope: invalid.illegal.stray-bracket-end
 
+    - match: '\)'
+      scope: invalid.illegal.stray-parentheses-end
+
     # Argument Property
     - match: '(?<=\()\w+(?=\:)'
       scope: string.property.argument.graphql
@@ -41,6 +44,26 @@ contexts:
     # Has Arguments
     - match: '\b\w+(?=\()'
       scope: string.property.graphql
+
+    # Built-in Scalar Types
+    - match: '\bID\b'
+      scope: constant.language.id.graphql
+
+    - match: '\bInt\b'
+      scope: constant.language.int.graphql
+
+    - match: '\bString\b'
+      scope: constant.language.string.graphql
+
+    - match: '\bFloat\b'
+      scope: constant.language.float.graphql
+
+    - match: '\bBoolean\b'
+      scope: constant.language.boolean.graphql
+
+    # Numbers
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.graphql
 
     # Symbols
     - match: '\:'
@@ -55,7 +78,7 @@ contexts:
     - match: '='
       scope: keyword.operator.assignment.graphql
 
-    # Storage Types
+    # Type Definitions
     - match: '\btype\b'
       scope: storage.type.type.graphql
 
@@ -80,7 +103,7 @@ contexts:
     - match: '\benum\b'
       scope: storage.type.enum.graphql
 
-    # Storage type names
+    # Type Definition Names
     - match: '(?<=type )\w+\b'
       scope: meta.type.type
 
@@ -104,10 +127,6 @@ contexts:
 
     - match: '(?<=enum )\w+\b'
       scope: meta.type.enum
-
-    # Numbers
-    - match: '\b(-)?[0-9.]+\b'
-      scope: constant.numeric.graphql
 
   brackets:
     - match: '}'

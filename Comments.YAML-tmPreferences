@@ -1,0 +1,6 @@
+name: Comments
+scope: source.graphql
+settings:
+  shellVariables:
+    - name: TM_COMMENT_START
+      value: '# '
