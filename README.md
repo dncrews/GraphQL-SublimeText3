@@ -1,7 +1,9 @@
 
 # GraphQL Language Definition for SublimeText 3
 
-GraphQL language definition for SublimeText.
+GraphQL language definition for SublimeText. Finally support syntax highlighting for your GraphQL IDL files!
+
+![Highlit Screenshot](screenshot.png)
 
 ## Installation and Use
 
