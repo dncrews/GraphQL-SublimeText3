@@ -127,11 +127,18 @@ contexts:
 
     - match: '(?<=enum )\w+\b'
       scope: meta.type.enum
+      push: enums
 
   brackets:
     - match: '}'
       pop: true
     - include: main
+
+  enums:
+    - match: '\w+'
+      scope: variable.parameter.enum.graphql
+    - match: '}'
+      pop: true
 
   parentheses:
     - match: '\b\w+(?=\:)'
