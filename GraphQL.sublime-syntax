@@ -66,9 +66,6 @@ contexts:
       scope: constant.numeric.graphql
 
     # Symbols
-    - match: '\:'
-      scope: constant.other.object.key.graphql
-
     - match: '!'
       scope: keyword.control.non-null.graphql
 
@@ -89,10 +86,16 @@ contexts:
       scope: storage.type.interface.graphql
 
     - match: '\bimplements\b'
-      scope: storage.type.implements.graphql
+      scope: keyword.operator.implements.graphql
 
     - match: '\binput\b'
       scope: storage.type.input.graphql
+
+    - match: '\bfragment\b'
+      scope: storage.type.fragment.graphql
+
+    - match: '\bon\b'
+      scope: storage.type.on.graphql
 
     - match: '\bscalar\b'
       scope: storage.type.scalar.graphql
@@ -118,6 +121,12 @@ contexts:
 
     - match: '(?<=input )\w+\b'
       scope: meta.type.input
+
+    - match: '(?<=fragment )\w+\b'
+      scope: meta.type.fragment
+
+    - match: '(?<=on )\w+\b'
+      scope: meta.type.fragment.on meta.type.type
 
     - match: '(?<=scalar )\w+\b'
       scope: meta.type.scalar
