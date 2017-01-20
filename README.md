@@ -11,7 +11,7 @@ GraphQL language definition for SublimeText. Finally support syntax highlighting
 ## Installation and Use
 
 1. [Install Package Control](https://sublime.wbond.net/installation)
-2. `Package Control: Install Package` => `GraphQL Syntax`
+2. `Package Control: Install Package` => `GraphQL`
 
 
 ## Contributing
