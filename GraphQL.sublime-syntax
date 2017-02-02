@@ -7,6 +7,12 @@ file_extensions:
   - gql
 scope: source.graphql
 contexts:
+  comments:
+    # Comments begin with a '#' and finish at the end of the line
+    - match: '#'
+      scope: punctuation.definition.comment.graphql
+      push: line_comment
+
   main:
     # Strings begin and end with quotes, and use backslashes as an escape
     # character
@@ -14,10 +20,7 @@ contexts:
       scope: punctuation.definition.string.begin.graphql
       push: double_quoted_string
 
-    # Comments begin with a '//' and finish at the end of the line
-    - match: '#'
-      scope: punctuation.definition.comment.graphql
-      push: line_comment
+    - include: comments
 
     # Brace matching
     - match: '{'
@@ -148,6 +151,7 @@ contexts:
       scope: variable.parameter.enum.graphql
     - match: '}'
       pop: true
+    - include: comments
 
   parentheses:
     - match: '\b\w+(?=\:)'
