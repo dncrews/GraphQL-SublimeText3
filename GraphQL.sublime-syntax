@@ -13,10 +13,18 @@ contexts:
       scope: punctuation.definition.comment.graphql
       push: line_comment
 
+    - match: (""")
+      scope: punctuation.definition.comment.begin.graphql
+      push:
+        - meta_scope: comment.block.graphql
+        - match: (""")
+          scope: punctuation.definition.comment.end.graphql
+          pop: true
+
   main:
     # Strings begin and end with quotes, and use backslashes as an escape
     # character
-    - match: '"'
+    - match: '"\w+'
       scope: punctuation.definition.string.begin.graphql
       push: double_quoted_string
 
