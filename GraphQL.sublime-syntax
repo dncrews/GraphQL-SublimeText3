@@ -270,8 +270,10 @@ contexts:
       - match: \)
         scope: punctuation.section.group.end.graphql
         pop: true
-      - match: '{{name}}'
-        scope: variable.parameter.graphql
+      - match: '(\$)({{name}})'
+        captures:
+          1: punctuation.definition.variable.graphql
+          2: variable.parameter.graphql
         push:
           - - include: default-value
           - - match: ':'
@@ -421,11 +423,17 @@ contexts:
         - include: else-pop
 
   type:
+    - meta_include_prototype: false
+    - match: ''
+      set:
+        - type-non-null
+        - type-value
+
+  type-value:
     - include: type-named
     - match: \[
       scope: storage.modifier.list.graphql
       set:
-        - - include: type-non-null
         - - match: \]
             scope: storage.modifier.list.graphql
             pop: true
@@ -439,7 +447,7 @@ contexts:
       pop: true
     - match: '{{name}}'
       scope: variable.type.graphql
-      set: type-non-null
+      pop: true
 
   type-non-null:
     - match: '!'
