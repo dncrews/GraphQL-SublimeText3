@@ -369,6 +369,12 @@ contexts:
         - match: '{{name}}'
           scope: entity.name.field.graphql
           push:
+            - - match: ':'
+                scope: punctuation.separator.key-value.graphql
+                set:
+                  - directives
+                  - type
+              - include: else-pop
             - arguments-definition
     - include: else-pop
 

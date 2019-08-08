@@ -262,6 +262,13 @@
 #                               ^^^^^^^^^^^ variable.function.annotation
         )
 #       ^ punctuation.section.group.end
+        :
+#       ^ punctuation.separator.key-value.graphql
+        Int
+#       ^^^ variable.type.graphql support.type.graphql
+        @myDirective
+#       ^ punctuation.definition.annotation.graphql
+#        ^^^^^^^^^^^ variable.function.annotation.graphql
     }
 #   ^ meta.block punctuation.section.block.end
 
