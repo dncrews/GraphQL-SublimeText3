@@ -87,7 +87,7 @@
 #   ^ punctuation.section.block.begin
 
         myAlias : myField ( )
-#       ^^^^^^^ variable.parameter
+#       ^^^^^^^ entity.name.field
 #               ^ meta.block punctuation.separator.key-value
 #                 ^^^^^^^ meta.block variable.parameter
 #                         ^ meta.block punctuation.section.group.begin
@@ -102,56 +102,56 @@
 #                              ^ punctuation.section.block.end
 
         myField(
-            $var  = $myVar
-#                   ^ punctuation.definition.variable
-#                    ^^^^^ variable.other
-            $zero = 0
-#                   ^ constant.numeric.integer
-            $int  = 123
-#                   ^^^ constant.numeric.integer
-            $frac = 123.45
-#                   ^^^^^^ constant.numeric.float
-            $exp1 = 123e+1
-#                   ^^^^^^ constant.numeric.float
-            $exp2 = 123e-1
-#                   ^^^^^^ constant.numeric.float
-            $exp3 = 123E1
-#                   ^^^^^ constant.numeric.float
-            $expf = 123.45e1
-#                   ^^^^^^^^ constant.numeric.float
-            $null = null
-#                   ^^^^ constant.language.null
-            $true = true
-#                   ^^^^ constant.language.boolean.true
-            $false= false
-#                   ^^^^^ constant.language.boolean.false
-            $enum = myVal
-#                   ^^^^^ constant.other
-            $str  = "foo!"
-#                   ^ punctuation.definition.string.begin
-#                   ^^^^^^ string.quoted.double
-#                        ^ punctuation.definition.string.end
-            $str2 = "\u12345"
-#                    ^^^^^^ constant.character.escape.hex
-#                          ^^ - constant
-            $str3 = "\u123"
-#                    ^^^^^ invalid.illegal.escape
-            $str4 = "\"\\\/\b\f\n\r\t"
-#                    ^^^^^^^^^^^^^^^^ constant.character.escape
-            $str5 = "\0\a"
-#                    ^^^^ invalid.illegal.escape
-            $str6 = "foo
+            var  : $myVar
+#                  ^ punctuation.definition.variable
+#                   ^^^^^ variable.other
+            zero : 0
+#                  ^ constant.numeric.integer
+            int  : 123
+#                  ^^^ constant.numeric.integer
+            frac : 123.45
+#                  ^^^^^^ constant.numeric.float
+            exp1 : 123e+1
+#                  ^^^^^^ constant.numeric.float
+            exp2 : 123e-1
+#                  ^^^^^^ constant.numeric.float
+            exp3 : 123E1
+#                  ^^^^^ constant.numeric.float
+            expf : 123.45e1
+#                  ^^^^^^^^ constant.numeric.float
+            null : null
+#                  ^^^^ constant.language.null
+            true : true
+#                  ^^^^ constant.language.boolean.true
+            false: false
+#                  ^^^^^ constant.language.boolean.false
+            enum : myVal
+#                  ^^^^^ constant.other
+            str  : "foo!"
+#                  ^ punctuation.definition.string.begin
+#                  ^^^^^^ string.quoted.double
+#                       ^ punctuation.definition.string.end
+            str2 : "\u12345"
+#                   ^^^^^^ constant.character.escape.hex
+#                         ^^ - constant
+            str3 : "\u123"
+#                   ^^^^^ invalid.illegal.escape
+            str4 : "\"\\\/\b\f\n\r\t"
+#                   ^^^^^^^^^^^^^^^^ constant.character.escape
+            str5 : "\0\a"
+#                   ^^^^ invalid.illegal.escape
+            str6 : "foo
 #                   ^^^^^ string.quoted.double
     # not a comment
 #   ^^^^^^^^^^^^^^^ string - comment
             bar"
 #           ^^^^ string.quoted.double
-            $str7 = """foo"""
-#                   ^^^^^^^^^ string.quoted.triple
-#                   ^^^ punctuation.definition.string.begin
-#                         ^^^ punctuation.definition.string.end
-            $str8 = """foo
-#                   ^^^^^^^^^ string.quoted.triple
+            str7 : """foo"""
+#                  ^^^^^^^^^ string.quoted.triple
+#                  ^^^ punctuation.definition.string.begin
+#                        ^^^ punctuation.definition.string.end
+            str8 : """foo
+#                  ^^^^^^^^^ string.quoted.triple
     # not a comment
 #   ^^^^^^^^^^^^^^^ string - comment
     \"""
@@ -159,31 +159,31 @@
             bar"""
 #           ^^^^^^ string.quoted.triple
 
-            $arr1 = []
-#                   ^^ meta.sequence
-#                   ^ punctuation.section.sequence.begin
-#                    ^ punctuation.section.sequence.end
-            $arr2 = [ 1 2 3 ]
-#                   ^^^^^^^^^ meta.sequence
-#                   ^ punctuation.section.sequence.begin
-#                     ^ constant.numeric.integer
-#                       ^ constant.numeric.integer
+            arr1 : []
+#                  ^^ meta.sequence
+#                  ^ punctuation.section.sequence.begin
+#                   ^ punctuation.section.sequence.end
+            arr2 : [ 1 2 3 ]
+#                  ^^^^^^^^^ meta.sequence
+#                  ^ punctuation.section.sequence.begin
+#                    ^ constant.numeric.integer
+#                      ^ constant.numeric.integer
+#                        ^ constant.numeric.integer
+#                          ^ punctuation.section.sequence.end
+            obj1 : {}
+#                  ^^ meta.mapping
+#                  ^ punctuation.section.mapping.begin
+#                   ^ punctuation.section.mapping.end
+            obj2 : { foo: 1 bar: baz }
+#                  ^^^^^^^^^^^^^^^^^^^ meta.mapping
+#                  ^ punctuation.section.mapping.begin
+#                    ^^^ meta.mapping.key
+#                       ^ punctuation.separator.key-value
 #                         ^ constant.numeric.integer
-#                           ^ punctuation.section.sequence.end
-            $obj1 = {}
-#                   ^^ meta.mapping
-#                   ^ punctuation.section.mapping.begin
-#                    ^ punctuation.section.mapping.end
-            $obj2 = { foo: 1 bar: baz }
-#                   ^^^^^^^^^^^^^^^^^^^ meta.mapping
-#                   ^ punctuation.section.mapping.begin
-#                     ^^^ meta.mapping.key
-#                        ^ punctuation.separator.key-value
-#                          ^ constant.numeric.integer
-#                            ^^^ meta.mapping.key
-#                               ^ punctuation.separator.key-value
-#                                 ^^^ constant.other
-#                                     ^ punctuation.section.mapping.end
+#                           ^^^ meta.mapping.key
+#                              ^ punctuation.separator.key-value
+#                                ^^^ constant.other
+#                                    ^ punctuation.section.mapping.end
         )
 
    }

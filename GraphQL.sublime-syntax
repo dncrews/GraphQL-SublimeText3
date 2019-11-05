@@ -309,11 +309,11 @@ contexts:
           scope: punctuation.section.block.end.graphql
           pop: true
         - match: '{{name}}'
-          scope: variable.parameter.graphql
+          scope: entity.name.field.graphql
           push:
             - selection-set
             - directives
-            - variable-definitions
+            - field-arguments
             - aliased-field-name
     - include: else-pop
 
@@ -325,6 +325,22 @@ contexts:
         scope: variable.parameter.graphql
         pop: true
       - include: else-pop
+    - include: else-pop
+
+  field-arguments:
+    - match: \(
+      scope: punctuation.section.group.begin.graphql
+      set:
+      - match: \)
+        scope: punctuation.section.group.end.graphql
+        pop: true
+      - match: '{{name}}'
+        scope: variable.parameter.graphql
+        push:
+          - - match: ':'
+              scope: punctuation.separator.type.graphql
+              set: value
+            - include: else-pop
     - include: else-pop
 
   schema-definition:
