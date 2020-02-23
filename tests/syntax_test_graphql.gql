@@ -1,0 +1,379 @@
+# SYNTAX TEST "Packages/GraphQL/GraphQL.sublime-syntax"
+
+    # Comments
+#   ^^^^^^^^^^ comment.line
+#   ^ punctuation.definition.comment
+
+    ,
+#   ^ punctuation.separator.sequence
+
+    "Foo" query {}
+#   ^^^^^ comment.block.documentation
+#   ^ punctuation.definition.comment.begin
+#       ^ punctuation.definition.comment.end
+#         ^^^^^ keyword.declaration.query
+
+    """
+#   ^^^ comment.block.documentation punctuation.definition.comment.begin
+    Foo
+#   ^^^^ comment.block.documentation
+    """
+#   ^^^ comment.block.documentation punctuation.definition.comment.end
+    query {}
+#   ^^^^^ keyword.declaration.query
+
+    query myQuery
+#   ^^^^^ keyword.declaration.query
+#         ^^^^^^^ entity.name.query
+
+    (
+#   ^ punctuation.section.group.begin        
+
+        $myVar : someType ! = 42
+#       ^ punctuation.definition.variable
+#        ^^^^^ variable.parameter
+#              ^ punctuation.separator.type
+#                ^^^^^^^^ variable.type
+#                         ^ storage.modifier.required
+#                           ^ punctuation.separator.key-value
+#                             ^^ constant.numeric.integer
+
+        $var2: [[someType!]]!
+#       ^ punctuation.definition.variable
+#        ^^^^ variable.parameter
+#            ^ punctuation.separator.type
+#              ^^ storage.modifier.list
+#                ^^^^^^^^ variable.type
+#                        ^ storage.modifier.required
+#                         ^^ storage.modifier.list
+#                           ^ storage.modifier.required
+
+        $t1: Int
+#            ^^^ variable.type support.type
+        $t2: Float
+#            ^^^^^ variable.type support.type
+        $t3: String
+#            ^^^^^^ variable.type support.type
+        $t4: Boolean
+#            ^^^^^^^ variable.type support.type
+        $t5: ID
+#            ^^ variable.type support.type
+        $t6: ID!
+#            ^^ variable.type support.type
+#              ^ storage.modifier.required
+
+    )
+#   ^ punctuation.section.group.end
+
+    @myDirective ( myArg : 42 )
+#   ^ punctuation.definition.annotation
+#    ^^^^^^^^^^^ variable.function.annotation
+#                ^ punctuation.section.group.begin
+#                  ^^^^^ variable.parameter
+#                        ^ punctuation.separator.key-value
+#                          ^^ constant.numeric.integer
+#                             ^ punctuation.section.group.end
+
+    @skip
+#    ^^^^ variable.function.annotation support.function
+
+    @include
+#    ^^^^^^^ variable.function.annotation support.function
+
+    @deprecated
+#    ^^^^^^^^^^ variable.function.annotation support.function
+
+    {
+#   ^ punctuation.section.block.begin
+
+        myAlias : myField ( )
+#       ^^^^^^^ entity.name.field
+#               ^ meta.block punctuation.separator.key-value
+#                 ^^^^^^^ meta.block variable.parameter
+#                         ^ meta.block punctuation.section.group.begin
+#                           ^ meta.block punctuation.section.group.end
+
+            @myDirective ( ) { }
+#           ^ punctuation.definition.annotation
+#            ^^^^^^^^^^^ variable.function.annotation
+#                        ^ punctuation.section.group.begin
+#                          ^ punctuation.section.group.end
+#                            ^ punctuation.section.block.begin
+#                              ^ punctuation.section.block.end
+
+        myField(
+            var  : $myVar
+#                  ^ punctuation.definition.variable
+#                   ^^^^^ variable.other
+            zero : 0
+#                  ^ constant.numeric.integer
+            int  : 123
+#                  ^^^ constant.numeric.integer
+            frac : 123.45
+#                  ^^^^^^ constant.numeric.float
+            exp1 : 123e+1
+#                  ^^^^^^ constant.numeric.float
+            exp2 : 123e-1
+#                  ^^^^^^ constant.numeric.float
+            exp3 : 123E1
+#                  ^^^^^ constant.numeric.float
+            expf : 123.45e1
+#                  ^^^^^^^^ constant.numeric.float
+            null : null
+#                  ^^^^ constant.language.null
+            true : true
+#                  ^^^^ constant.language.boolean.true
+            false: false
+#                  ^^^^^ constant.language.boolean.false
+            enum : myVal
+#                  ^^^^^ constant.other
+            str  : "foo!"
+#                  ^ punctuation.definition.string.begin
+#                  ^^^^^^ string.quoted.double
+#                       ^ punctuation.definition.string.end
+            str2 : "\u12345"
+#                   ^^^^^^ constant.character.escape.hex
+#                         ^^ - constant
+            str3 : "\u123"
+#                   ^^^^^ invalid.illegal.escape
+            str4 : "\"\\\/\b\f\n\r\t"
+#                   ^^^^^^^^^^^^^^^^ constant.character.escape
+            str5 : "\0\a"
+#                   ^^^^ invalid.illegal.escape
+            str6 : "foo
+#                   ^^^^^ string.quoted.double
+    # not a comment
+#   ^^^^^^^^^^^^^^^ string - comment
+            bar"
+#           ^^^^ string.quoted.double
+            str7 : """foo"""
+#                  ^^^^^^^^^ string.quoted.triple
+#                  ^^^ punctuation.definition.string.begin
+#                        ^^^ punctuation.definition.string.end
+            str8 : """foo
+#                  ^^^^^^^^^ string.quoted.triple
+    # not a comment
+#   ^^^^^^^^^^^^^^^ string - comment
+    \"""
+#   ^^^^ constant.character.escape
+            bar"""
+#           ^^^^^^ string.quoted.triple
+
+            arr1 : []
+#                  ^^ meta.sequence
+#                  ^ punctuation.section.sequence.begin
+#                   ^ punctuation.section.sequence.end
+            arr2 : [ 1 2 3 ]
+#                  ^^^^^^^^^ meta.sequence
+#                  ^ punctuation.section.sequence.begin
+#                    ^ constant.numeric.integer
+#                      ^ constant.numeric.integer
+#                        ^ constant.numeric.integer
+#                          ^ punctuation.section.sequence.end
+            obj1 : {}
+#                  ^^ meta.mapping
+#                  ^ punctuation.section.mapping.begin
+#                   ^ punctuation.section.mapping.end
+            obj2 : { foo: 1 bar: baz }
+#                  ^^^^^^^^^^^^^^^^^^^ meta.mapping
+#                  ^ punctuation.section.mapping.begin
+#                    ^^^ meta.mapping.key
+#                       ^ punctuation.separator.key-value
+#                         ^ constant.numeric.integer
+#                           ^^^ meta.mapping.key
+#                              ^ punctuation.separator.key-value
+#                                ^^^ constant.other
+#                                    ^ punctuation.section.mapping.end
+        )
+
+   }
+#  ^ punctuation.section.block.end
+
+    mutation {}
+#   ^^^^^^^^ keyword.declaration.mutation
+
+    subscription {}
+#   ^^^^^^^^^^^^ keyword.declaration.subscription
+
+    fragment myFragment on myType @myDirective {}
+#   ^^^^^^^^ keyword.declaration.fragment
+#            ^^^^^^^^^^ entity.name.fragment
+#                       ^^ keyword.other
+#                          ^^^^^^ variable.type
+#                                 ^ punctuation.definition.annotation
+#                                  ^^^^^^^^^^^ variable.function.annotation
+#                                              ^^ meta.block
+
+    schema @myDirective {
+#   ^^^^^^ keyword.declaration.schema
+#          ^ punctuation.definition.annotation
+#           ^^^^^^^^^^^ variable.function.annotation
+#                       ^ meta.block punctuation.section.block.begin
+        query : Int
+#       ^^^^^ meta.block keyword.other
+#             ^ meta.block punctuation.separator.key-value
+#               ^^^ meta.block variable.type support.type
+        mutation : String
+#       ^^^^^^^^ meta.block keyword.other
+#                ^ meta.block punctuation.separator.key-value
+#                  ^^^^^^ meta.block variable.type support.type
+        subscription : Boolean
+#       ^^^^^^^^^^^^ meta.block keyword.other
+#                    ^ meta.block punctuation.separator.key-value
+#                      ^^^^^^^ meta.block variable.type support.type
+    }
+#   ^ meta.block punctuation.section.block.end
+
+    scalar myScalar @myDirective
+#   ^^^^^^ keyword.declaration.scalar
+#          ^^^^^^^^ entity.name.type.scalar
+#                   ^ punctuation.definition.annotation
+#                    ^^^^^^^^^^^ variable.function.annotation
+
+    type myType implements Int & String @myDirective
+#   ^^^^ keyword.declaration.type
+#        ^^^^^^ entity.name.type.object
+#               ^^^^^^^^^^ keyword.declaration.implements
+#                          ^^^ variable.type support.type
+#                              ^ punctuation.separator.sequence
+#                                ^^^^^^ variable.type support.type
+#                                       ^ punctuation.definition.annotation
+#                                        ^^^^^^^^^^^ variable.function.annotation
+    {
+#   ^ meta.block punctuation.section.block.begin
+        "foo"
+#       ^^^^^ comment.block.documentation
+#       ^ punctuation.definition.comment.begin
+#           ^ punctuation.definition.comment.end
+        """foo"""
+
+        myField (
+#       ^^^^^^^ entity.name.field
+#               ^ punctuation.section.group.begin
+            "Foo"
+#           ^^^^^ comment.block.documentation
+            myParam : Int = 42 @myDirective
+#           ^^^^^^^ variable.parameter
+#                   ^ punctuation.separator
+#                     ^^^ variable.type support.type
+#                         ^ punctuation.separator.key-value
+#                           ^^ constant.numeric.integer
+#                              ^ punctuation.definition.annotation
+#                               ^^^^^^^^^^^ variable.function.annotation
+        )
+#       ^ punctuation.section.group.end
+        :
+#       ^ punctuation.separator.key-value.graphql
+        Int
+#       ^^^ variable.type.graphql support.type.graphql
+        @myDirective
+#       ^ punctuation.definition.annotation.graphql
+#        ^^^^^^^^^^^ variable.function.annotation.graphql
+    }
+#   ^ meta.block punctuation.section.block.end
+
+    type myType implements & Int
+#                          ^ punctuation.separator.sequence
+#                            ^^^ variable.type support.type
+
+    interface myInterface @myDirective {}
+#   ^^^^^^^^^ keyword.declaration.type.interface
+#             ^^^^^^^^^^^ entity.name.type.interface
+#                         ^ punctuation.definition.annotation
+#                          ^^^^^^^^^^^ variable.function.annotation
+#                                      ^^ meta.block
+
+    union myUnion = Int | String
+#   ^^^^^ keyword.declaration.type.interface
+#         ^^^^^^^ entity.name.type.union
+#                 ^ punctuation.separator.key-value
+#                   ^^^ variable.type support.type
+#                       ^ keyword.operator
+#                         ^^^^^^ variable.type support.type
+
+    union myUnion = | Int
+#                   ^ keyword.operator
+#                     ^^^ variable.type support.type
+
+    enum myEnum @myDirective {
+#   ^^^^ keyword.declaration.type.enum
+#        ^^^^^^ entity.name.type.enum
+#               ^ punctuation.definition.annotation
+#                ^^^^^^^^^^^ variable.function.annotation
+#                            ^ meta.block punctuation.section.block.begin
+        "Foo" myValue @myDirective
+#       ^^^^^ comment.block.documentation
+#             ^^^^^^^ entity.name.constant
+#                     ^ punctuation.definition.annotation
+#                      ^^^^^^^^^^^ variable.function.annotation
+    }
+#   ^ meta.block punctuation.section.block.end
+
+    input myInput @myDirective {
+#   ^^^^^ keyword.declaration.type.input
+#         ^^^^^^^ entity.name.type.input
+#                 ^ punctuation.definition.annotation
+#                  ^^^^^^^^^^^ variable.function.annotation
+#                              ^ meta.block punctuation.section.block.begin
+        "Foo" myInput : Int = 42 @myDirective
+#       ^^^^^ comment.block.documentation
+#             ^^^^^^^ variable.parameter
+#                     ^ punctuation.separator
+#                       ^^^ variable.type support.type
+#                           ^ punctuation.separator.key-value
+#                             ^^ constant.numeric.integer
+#                                ^ punctuation.definition.annotation
+#                                 ^^^^^^^^^^^ variable.function.annotation
+    }
+#   ^ meta.block punctuation.section.block.end
+
+    directive @myDirective () on QUERY
+#   ^^^^^^^^^ keyword.declaration.directive
+#             ^ punctuation.definition.annotation
+#              ^^^^^^^^^^^ entity.name.definition
+#                          ^ punctuation.section.group.begin
+#                           ^ punctuation.section.group.end
+#                             ^^ keyword.declaration.directive
+#                                ^^^^^ constant.language
+
+    directive @myDirective () on
+    | QUERY | MUTATION | SUBSCRIPTION | FIELD | FRAGMENT_DEFINITION | FRAGMENT_SPREAD | INLINE_FRAGMENT
+#   ^ keyword.operator
+#     ^^^^^ constant.language
+#           ^ keyword.operator
+#             ^^^^^^^^ constant.language
+#                      ^ keyword.operator
+#                        ^^^^^^^^^^^^ constant.language
+#                                     ^ keyword.operator
+#                                       ^^^^^ constant.language
+#                                             ^ keyword.operator
+#                                               ^^^^^^^^^^^^^^^^^^^ constant.language
+#                                                                   ^ keyword.operator
+#                                                                     ^^^^^^^^^^^^^^^ constant.language
+#                                                                                     ^ keyword.operator
+#                                                                                       ^^^^^^^^^^^^^^^ constant.language
+    | SCHEMA | SCALAR | OBJECT | FIELD_DEFINITION | ARGUMENT_DEFINITION | INTERFACE | UNION | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
+#     ^^^^^^ constant.language
+#            ^ keyword.operator
+#              ^^^^^^ constant.language
+#                     ^ keyword.operator
+#                       ^^^^^^ constant.language
+#                              ^ keyword.operator
+#                                ^^^^^^^^^^^^^^^^ constant.language
+#                                                 ^ keyword.operator
+#                                                   ^^^^^^^^^^^^^^^^^^^ constant.language
+#                                                                       ^ keyword.operator
+#                                                                         ^^^^^^^^^ constant.language
+#                                                                                   ^ keyword.operator
+#                                                                                     ^^^^^ constant.language
+#                                                                                           ^ keyword.operator
+#                                                                                             ^^^^ constant.language
+#                                                                                                  ^ keyword.operator
+#                                                                                                    ^^^^^^^^^^ constant.language
+#                                                                                                               ^ keyword.operator
+#                                                                                                                 ^^^^^^^^^^^^ constant.language
+#                                                                                                                              ^ keyword.operator
+#                                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^ constant.language
+#                                                                                                                                                      ^ 
+
+    extend scalar
