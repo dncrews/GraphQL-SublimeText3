@@ -152,23 +152,23 @@ contexts:
 
   description:
     - match: '"""'
-      scope: punctuation.definition.comment.begin.graphql
+      scope: string.quoted.multiline.begin.graphql
       set:
         - meta_include_prototype: false
-        - meta_scope: comment.block.documentation.graphql
+        - meta_scope: string.quoted.multiline.graphql
         - match: '\\"""'
           scope: constant.character.escape.graphql
         - match: '"""'
-          scope: punctuation.definition.comment.end.graphql
+          scope: string.quoted.multiline.end.graphql
           pop: true
 
     - match: '"'
-      scope: punctuation.definition.comment.begin.graphql
+      scope: string.quoted.double.begin.graphql
       set:
         - meta_include_prototype: false
-        - meta_scope: comment.block.documentation.graphql
+        - meta_scope: string.quoted.double.graphql
         - match: '"'
-          scope: punctuation.definition.comment.end.graphql
+          scope: string.quoted.double.end.graphql
           pop: true
 
         - match: '\\u\h{4}'
