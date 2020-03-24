@@ -4,6 +4,7 @@
 name: GraphQL
 file_extensions:
   - graphql
+  - graphqls
   - gql
 scope: source.graphql
 variables:
