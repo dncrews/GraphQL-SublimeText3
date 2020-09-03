@@ -235,7 +235,7 @@
 #        ^^^^^^ entity.name.type.object
 #               ^^^^^^^^^^ keyword.declaration.implements
 #                          ^^^ variable.type support.type
-#                              ^ punctuation.separator.sequence
+#                              ^ keyword.operator
 #                                ^^^^^^ variable.type support.type
 #                                       ^ punctuation.definition.annotation
 #                                        ^^^^^^^^^^^ variable.function.annotation
@@ -273,15 +273,17 @@
 #   ^ meta.block punctuation.section.block.end
 
     type myType implements & Int
-#                          ^ punctuation.separator.sequence
+#                          ^ keyword.operator
 #                            ^^^ variable.type support.type
 
-    interface myInterface @myDirective {}
+    interface myInterface implements ParentIf @myDirective {}
 #   ^^^^^^^^^ keyword.declaration.type.interface
 #             ^^^^^^^^^^^ entity.name.type.interface
-#                         ^ punctuation.definition.annotation
-#                          ^^^^^^^^^^^ variable.function.annotation
-#                                      ^^ meta.block
+#                         ^^^^^^^^^^ keyword.declaration.implements
+#                                    ^^^^^^^^ variable.type
+#                                             ^ punctuation.definition.annotation
+#                                              ^^^^^^^^^^^ variable.function.annotation
+#                                                          ^^ meta.block
 
     union myUnion = Int | String
 #   ^^^^^ keyword.declaration.type.interface
