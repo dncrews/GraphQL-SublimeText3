@@ -111,7 +111,7 @@ contexts:
       push:
         - type-definition
         - directives
-        - type-implements
+        - implements
         - type-name
 
     - match: interface{{name_break}}
@@ -119,6 +119,7 @@ contexts:
       push:
         - type-definition
         - directives
+        - implements
         - interface-name
 
     - match: union{{name_break}}
@@ -361,12 +362,12 @@ contexts:
             - include: else-pop
     - include: else-pop
 
-  type-implements:
+  implements:
     - match: implements{{name_break}}
       scope: keyword.declaration.implements.graphql
       set:
         - - match: '&'
-            scope: punctuation.separator.sequence.graphql
+            scope: keyword.operator.graphql
             push: type-named
           - include: else-pop
         - - include: type-named
