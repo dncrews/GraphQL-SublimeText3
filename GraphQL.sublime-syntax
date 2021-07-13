@@ -160,7 +160,7 @@ contexts:
         - meta_scope: string.quoted.multiline.graphql
         - match: '\\"""'
           scope: constant.character.escape.graphql
-        - match: '"""'
+        - match: '"{3,5}'
           scope: string.quoted.multiline.end.graphql
           pop: true
 
