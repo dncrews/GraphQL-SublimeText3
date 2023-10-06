@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>res</string>
+		<string>resi</string>
+	</array>
+	<key>injectionSelector</key>
+	<string>L:source -string -comment</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>(%graphql\()\s*$</string>
+			<key>contentName</key>
+			<string>meta.embedded.block.graphql</string>
+			<key>end</key>
+			<string>(?&lt;=\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>^\s*(`)$</string>
+					<key>end</key>
+					<string>^\s*(`)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>source.graphql</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(%graphql\(`)</string>
+			<key>contentName</key>
+			<string>meta.embedded.block.graphql</string>
+			<key>end</key>
+			<string>(\`( )?\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.graphql</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>inline.graphql.res</string>
+</dict>
+</plist>

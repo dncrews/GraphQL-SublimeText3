@@ -1,0 +1,39 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - js
+  - jsx
+  - ts
+  - tsx
+  - vue
+  - svelte
+scope: inline.graphql
+contexts:
+  main:
+    - match: \s*+(?:(?:(Relay)\??\.)(QL)|(gql|graphql|graphql\.experimental)|(/\* GraphQL \*/))\s*(`)
+      captures:
+        1: variable.other.class.js
+        2: entity.name.function.tagged-template.js
+        3: entity.name.function.tagged-template.js
+        4: comment.graphql.js
+        5: punctuation.definition.string.template.begin.js
+      push:
+        - meta_content_scope: meta.embedded.block.graphql
+        - match: '`'
+          captures:
+            0: punctuation.definition.string.template.end.js
+          pop: true
+        - include: scope:source.graphql
+    - match: (`)(#graphql)
+      captures:
+        1: punctuation.definition.string.template.begin.js
+        2: comment.line.graphql.js
+      push:
+        - meta_scope: taggedTemplates
+        - meta_content_scope: meta.embedded.block.graphql
+        - match: '`'
+          captures:
+            0: punctuation.definition.string.template.end.js
+          pop: true
+        - include: scope:source.graphql

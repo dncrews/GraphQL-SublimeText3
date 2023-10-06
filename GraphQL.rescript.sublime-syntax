@@ -1,0 +1,27 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+
+file_extensions:
+  - res
+  - resi
+scope: inline.graphql.res
+contexts:
+  main:
+    - match: (%graphql\()\s*$
+      push:
+        - meta_content_scope: meta.embedded.block.graphql
+        - match: (?<=\))
+          pop: true
+        - match: '^\s*(`)$'
+          push:
+            - match: '^\s*(`)'
+              pop: true
+            - include: scope:source.graphql
+    - match: '(%graphql\(`)'
+      push:
+        - meta_content_scope: meta.embedded.block.graphql
+        - match: (\`\s?\))
+          pop: true
+        - include: scope:source.graphql
+    # injectionSelector: L:source -string -comment
